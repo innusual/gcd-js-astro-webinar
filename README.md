@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este webinar es una introducción a Astro.js, un marco de framework moderno y rápido para la creación de sitios web. Aprenderás cómo Astro.js puede ayudarte a crear sitios web más rápidos y eficientes, y explorarás sus características y ventajas clave.
+Este webinar es una introducción a Astro.js, un framework moderno y rápido para la creación de sitios web. Aprenderás cómo Astro.js puede ayudarte a crear sitios web más rápidos y eficientes, y explorarás sus características y ventajas clave.
 
 ## Índice del webinar
 
