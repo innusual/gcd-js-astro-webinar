@@ -13,6 +13,7 @@ Este webinar es una introducción a Astro.js, un marco de framework moderno y r�
 
 ## Recursos
 
+- Webinar: Puedes ver este y el resto de webinars [aqui](https://innusual.sharepoint.com/sites/innusual/Lists/Webinars/)
 - Diapositivas: [gcd-js-astro-webinar](./gcd-js-astro-webinar.pdf)
 - Repositorios de código:
   - [astro.blog](./astro.blog/)
