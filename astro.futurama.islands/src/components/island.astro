@@ -1,0 +1,31 @@
+---
+import { getCnsIcons } from "@lib/utils";
+import Icon from "./island.icon.astro";
+type Props = {
+    title?: string;
+    classes?: string;
+    framework?: "react" | "vuejs" | "svelte";
+};
+
+const { title, classes, framework, ...rest } = Astro.props;
+const cns = getCnsIcons(framework);
+const icon = framework ?? null;
+---
+
+<section class:list={["rounded-4xl px-4 pb-4", classes]} {...rest}>
+    <div class={`flex align-middle my-4 ${!title && "justify-end"}`}>
+        {title && <h2 class="flex-1 text-xl font-bold mt-2">{title}</h2>}
+        {
+            icon && (
+                <div
+                    class={
+                        "w-10 h-10 flex justify-center items-center rounded-full bg-white shadow"
+                    }
+                >
+                    <Icon name={icon} classes={framework && cns} />
+                </div>
+            )
+        }
+    </div>
+    <slot />
+</section>

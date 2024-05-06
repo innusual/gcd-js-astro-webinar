@@ -1,0 +1,24 @@
+{
+  "name": "astro.futurama.api",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "scrap": "tsx .scrap.ts"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/cloudflare": "^10.2.0",
+    "astro": "^4.6.3",
+    "fuse.js": "^7.0.0",
+    "typescript": "^5.4.5",
+    "zod": "^3.22.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.0"
+  }
+}

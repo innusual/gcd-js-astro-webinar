@@ -1,0 +1,28 @@
+---
+import BaseLayout from "@layouts/base.astro";
+import Header from "@islands/header";
+import Sayings from "@islands/sayings.svelte";
+import Profile from "@islands/profile.vue";
+import Island from "@components/island.astro";
+---
+
+<BaseLayout>
+  <Island
+    framework="react"
+    classes="bg-blue-100/30 border-2 border-blue-100 rounded-md"
+  >
+    <Header client:only="react" />
+  </Island>
+  <Island
+    framework="vuejs"
+    classes="bg-green-100/30 border-2 border-green-100 rounded-md"
+  >
+    <Profile client:only="vue" />
+  </Island>
+  <Island
+    framework="svelte"
+    classes="bg-orange-100/30 border-2 border-orange-100 rounded-md"
+  >
+    <Sayings client:only="svelte" />
+  </Island>
+</BaseLayout>

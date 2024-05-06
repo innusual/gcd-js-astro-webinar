@@ -1,0 +1,41 @@
+---
+const response = await fetch(`${import.meta.env.URI}/api`);
+const {
+  title,
+  longDesc,
+  desc,
+  info: { synopsis, yearsAired, creators },
+  categories,
+  endpoints,
+} = await response.json();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>{title} API</h1>
+    <p>{longDesc}</p>
+    <h2>Overview</h2>
+    <p>{desc}</p>
+    <h3>Synopsis</h3>
+    <p>{synopsis}</p>
+    <h3>Years Aired</h3>
+    <p>{yearsAired}</p>
+    <h3>Creators</h3>
+    <p>{creators}</p>
+    <h2>Categories</h2>
+    <ul>
+      {categories.map((category: string[]) => <li>{category}</li>)}
+    </ul>
+    <h2>Endpoints</h2>
+    <ul>
+      {endpoints.map((endpoint: string[]) => <li>/api/{endpoint}</li>)}
+    </ul>
+  </body>
+</html>

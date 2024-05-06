@@ -1,0 +1,14 @@
+---
+import { Icon } from "astro-icon/components";
+
+type Props = {
+  name: string;
+  width?: number;
+  height?: number;
+  classes?: string;
+};
+
+const { name, height = 24, width = 24, classes = "" } = Astro.props;
+---
+
+<Icon {name} {width} {height} class={classes} />

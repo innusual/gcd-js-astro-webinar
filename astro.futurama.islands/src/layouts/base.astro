@@ -1,0 +1,57 @@
+---
+import { name } from "package.json";
+
+const links = [
+  { href: "/", text: "Home" },
+  { href: "/character", text: "Discover!" },
+];
+
+const isActive = (path: string) =>
+  Astro.url.pathname === path ? "font-medium" : "";
+
+const initials = name
+  .split(".")
+  .map((n) => n[0])
+  .join("");
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{name}</title>
+  </head>
+  <body class="h-dvh w-full space-y-10 p-5 flex flex-col">
+    <header
+      class="container mx-auto max-w-screen-lg flex justify-between items-center py-5"
+    >
+      <a class="text-2xl font-bold opacity-70 line-clamp-1 uppercase" href="/">
+        {initials}
+      </a>
+      <nav>
+        <ul class="flex justify-center space-x-4">
+          {
+            links.map(({ href, text }) => (
+              <li>
+                <a href={href} class={`line-clamp-1 text-lg ${isActive(href)}`}>
+                  {text}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+    <main class="container mx-auto max-w-screen-lg flex-1 space-y-5">
+      <slot />
+    </main>
+    <footer class="py-5">
+      <p class="text-center text-sm opacity-50">
+        Built with <a href="https://astro.build">Astro</a> and{" "}
+        <a href="">Tailwind CSS</a>
+      </p>
+    </footer>
+  </body>
+</html>

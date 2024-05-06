@@ -1,0 +1,113 @@
+---
+import BaseLayout from "@layouts/base.astro";
+import { getCharacters } from "@lib/api";
+import Icon from "@components/island.icon.astro";
+import { getCnsIcons } from "@lib/utils";
+
+const icons = [
+  { name: "astro", classes: getCnsIcons("astro") },
+  { name: "react", classes: getCnsIcons("react") },
+  { name: "vuejs", classes: getCnsIcons("vuejs") },
+  { name: "svelte", classes: getCnsIcons("svelte") },
+];
+
+const characters = await getCharacters();
+---
+
+<BaseLayout>
+  <section class="w-full py-6 md:py-12">
+    <div class="container flex flex-col items-center gap-2 px-4 md:px-6">
+      <div class="flex flex-col items-center gap-2 text-center">
+        <div class="space-y-2 text-center">
+          <h1
+            class="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl/none"
+          >
+            Astro Futurama Islands
+          </h1>
+          <p
+            class="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400"
+          >
+            A collection of beautifully designed islands for your Astro
+            projects. Accessible. Customizable. Open Source.
+          </p>
+        </div>
+        <div class="flex items-center gap-4 md:gap-8 lg:gap-12">
+          {
+            icons.map(({ name, classes }) => (
+              <div class="grid gap-1 text-center">
+                <div class="rounded-full overflow-hidden border border-gray-200">
+                  <Icon
+                    {name}
+                    width={64}
+                    height={64}
+                    classes={`aspect-square object-cover p-2 ${classes}`}
+                  />
+                </div>
+                <p class="text-xs text-gray-500 dark:text-gray-400 capitalize">
+                  {name}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="w-full py-12 md:py-24 lg:py-32">
+    <div class="container grid gap-8 px-4 md:px-6">
+      <div
+        class="flex flex-col items-center justify-center space-y-4 text-center"
+      >
+        <div class="space-y-2">
+          <h2
+            class="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl"
+          >
+            Meet the Characters
+          </h2>
+          <p
+            class="max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400"
+          >
+            Explore the main characters in Futurama
+          </p>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <script>
+          import { counterCharacter } from "@store";
+
+          const onclick = (id: number) => {
+            counterCharacter.set(String(id));
+            window.location.href = "/character";
+          };
+
+          const links = document.querySelectorAll("a.character");
+
+          links.forEach((link, i) =>
+            link.addEventListener("click", () => onclick(i + 1)),
+          );
+        </script>
+        {
+          characters.map((character) => (
+            <a class="character overflow-hidden rounded-lg shadow-lg">
+              <img
+                src={character?.image}
+                alt="Character 1"
+                width="400"
+                height="300"
+                class="h-60 w-full object-cover object-top"
+              />
+              <div class="bg-white p-4">
+                <h3 class="text-lg font-semibold">{character.name}</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                  {character.occupation}
+                </p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

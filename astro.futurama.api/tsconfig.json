@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@db/*": ["src/db/*"],
+      "@schema": ["src/lib/schema"],
+      "@utils": ["src/lib/utils"],
+      "@api/characters": ["src/lib/api/characters"],
+      "@api/episodes": ["src/lib/api/episodes"],
+      "@api/cast": ["src/lib/api/cast"],
+      "api/inventory": ["src/lib/api/inventory"],
+    },
+  },
+}
