@@ -1,0 +1,47 @@
+<script is:inline lang="ts">
+  const clipboard = () => {
+    const blocks = Array.from(document.querySelectorAll("pre"));
+    const svgCopy = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M1 5a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H5a4 4 0 0 1-4-4zm4-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2" clip-rule="evenodd"/></g></svg>`;
+    const svgCopied = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="currentColor"><path d="M10.243 16.314L6 12.07l1.414-1.414l2.829 2.828l5.656-5.657l1.415 1.415z"/><path fill-rule="evenodd" d="M1 5a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H5a4 4 0 0 1-4-4zm4-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2" clip-rule="evenodd"/></g></svg>`;
+
+    for (let code of blocks) {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("relative");
+      const button = document.createElement("button");
+      button.classList.add(
+        "absolute",
+        "top-0",
+        "right-0",
+        "cursor-pointer",
+        "p-2",
+        "flex",
+        "items-center",
+        "text-muted",
+      );
+      button.innerHTML = svgCopy;
+      code.setAttribute("tabindex", "0");
+      code.appendChild(button);
+      code.parentNode.insertBefore(wrapper, code);
+      wrapper.appendChild(code);
+
+      button.addEventListener("click", async () => {
+        await copy(code, button);
+      });
+    }
+
+    const copy = async (block, button) => {
+      const code = block.querySelector("code");
+      const text = code.innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        button.innerHTML = svgCopied;
+        setTimeout(() => {
+          button.innerHTML = svgCopy;
+        }, 2000);
+      } catch (err) {
+        console.error("Failed to copy!", err);
+      }
+    };
+  };
+  document.addEventListener("astro:page-load", () => clipboard());
+</script>
